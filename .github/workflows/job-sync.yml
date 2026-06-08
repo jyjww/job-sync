@@ -29,8 +29,8 @@ jobs:
           SARAMIN_AUTH: ${{ secrets.SARAMIN_AUTH }}
         run: |
           mkdir -p storage
-          printf '%s' "$JOBKOREA_AUTH" > storage/jobkorea-auth.json
-          printf '%s' "$SARAMIN_AUTH" > storage/saramin-auth.json
+          echo "$JOBKOREA_AUTH" | base64 -d > storage/jobkorea-auth.json
+          echo "$SARAMIN_AUTH" | base64 -d > storage/saramin-auth.json
 
       - name: Run job sync
         env:
