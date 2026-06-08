@@ -1,0 +1,37 @@
+name: Job Sync
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 매일 오전 9시 KST (= UTC 00:00)
+  workflow_dispatch: # 수동 실행 버튼
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Restore session files
+        run: |
+          mkdir -p storage
+          echo '${{ secrets.JOBKOREA_AUTH }}' > storage/jobkorea-auth.json
+          echo '${{ secrets.SARAMIN_AUTH }}' > storage/saramin-auth.json
+
+      - name: Run job sync
+        env:
+          CI: "true"
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
+        run: npm run dev

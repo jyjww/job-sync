@@ -1,0 +1,35 @@
+{
+  "name": "job-sync",
+  "version": "1.0.0",
+  "description": "Job scrap sync to Notion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx src/index.ts",
+    "save:jobkorea": "tsx src/save-auth.ts jobkorea",
+    "save:saramin": "tsx src/save-auth.ts saramin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jyjww/job-sync.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/jyjww/job-sync/issues"
+  },
+  "homepage": "https://github.com/jyjww/job-sync#readme",
+  "dependencies": {
+    "@a5c-ai/babysitter-sdk": "^0.0.187",
+    "@notionhq/client": "^5.22.0",
+    "dotenv": "^17.4.2",
+    "playwright": "^1.60.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
