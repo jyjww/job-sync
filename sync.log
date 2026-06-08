@@ -1,0 +1,9 @@
+
+> job-sync@1.0.0 dev
+> tsx src/index.ts
+
+current url: https://www.jobkorea.co.kr/User/Scrap
+[잡코리아 스크래핑] 페이지 2개 / 고유 공고 28개 / 수집 24개 / 마감 제외 0개 / 최종 22개 / 중복 링크 2개
+current url: https://www.saramin.co.kr/zf_user/persons/scrap-recruit?sort=PC&page_count=20&status=
+[사람인 스크래핑] 최종 1개
+추가: 23개, 중복 스킵: 0개
