@@ -24,10 +24,13 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Restore session files
+        env:
+          JOBKOREA_AUTH: ${{ secrets.JOBKOREA_AUTH }}
+          SARAMIN_AUTH: ${{ secrets.SARAMIN_AUTH }}
         run: |
           mkdir -p storage
-          echo '${{ secrets.JOBKOREA_AUTH }}' > storage/jobkorea-auth.json
-          echo '${{ secrets.SARAMIN_AUTH }}' > storage/saramin-auth.json
+          printf '%s' "$JOBKOREA_AUTH" > storage/jobkorea-auth.json
+          printf '%s' "$SARAMIN_AUTH" > storage/saramin-auth.json
 
       - name: Run job sync
         env:
