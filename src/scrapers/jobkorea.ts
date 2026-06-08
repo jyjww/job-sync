@@ -249,10 +249,14 @@ async function goToNextPage(page: Page, currentPage: number): Promise<boolean> {
 export async function scrapeJobKorea(): Promise<JobKoreaScrapeResult> {
   const browser = await chromium.launch({
     headless: process.env.CI === "true",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   const context = await browser.newContext({
     storageState: "storage/jobkorea-auth.json",
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    viewport: { width: 1280, height: 800 },
   });
 
   const page = await context.newPage();
@@ -260,6 +264,7 @@ export async function scrapeJobKorea(): Promise<JobKoreaScrapeResult> {
   try {
     await page.goto("https://www.jobkorea.co.kr/User/Scrap", {
       waitUntil: "domcontentloaded",
+      timeout: 60000,
     });
 
     await page.waitForTimeout(2000);

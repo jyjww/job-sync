@@ -19,17 +19,21 @@ function parseSaraminDeadline(text: string): string | undefined {
 export async function scrapeSaramin(): Promise<JobPosting[]> {
   const browser = await chromium.launch({
     headless: process.env.CI === "true",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
   const context = await browser.newContext({
     storageState: "storage/saramin-auth.json",
+    userAgent:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+    viewport: { width: 1280, height: 800 },
   });
 
   const page = await context.newPage();
 
   await page.goto(
     "https://www.saramin.co.kr/zf_user/persons/scrap-recruit?sort=PC&page_count=20&status=",
-    { waitUntil: "domcontentloaded" }
+    { waitUntil: "domcontentloaded", timeout: 60000 }
   );
 
   await page.waitForTimeout(3000);
