@@ -17,6 +17,21 @@ export async function findJobByUrl(url: string) {
   return result.results[0] ?? null;
 }
 
+function isValidIsoDate(date?: string): boolean {
+  if (!date) return false;
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return false;
+  }
+
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) {
+    return false;
+  }
+
+  return parsed.toISOString().slice(0, 10) === date;
+}
+
 export async function createJob(job: JobPosting) {
   await notion.pages.create({
     parent: {
@@ -52,7 +67,7 @@ export async function createJob(job: JobPosting) {
             },
           }
         : {}),
-      ...(job.deadline
+      ...(isValidIsoDate(job.deadline)
         ? {
             "서류 마감일": {
               date: {
@@ -76,6 +91,8 @@ export async function syncJobs(jobs: JobPosting[]) {
       skipped++;
       continue;
     }
+
+
 
     await createJob(job);
     added++;

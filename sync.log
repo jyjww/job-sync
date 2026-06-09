@@ -7,3 +7,69 @@ current url: https://www.jobkorea.co.kr/User/Scrap
 current url: https://www.saramin.co.kr/zf_user/persons/scrap-recruit?sort=PC&page_count=20&status=
 [사람인 스크래핑] 최종 1개
 추가: 23개, 중복 스킵: 0개
+
+> job-sync@1.0.0 dev
+> tsx src/index.ts
+
+current url: https://www.jobkorea.co.kr/User/Scrap
+[잡코리아 스크래핑] 페이지 2개 / 고유 공고 29개 / 수집 25개 / 마감 제외 0개 / 최종 23개 / 중복 링크 2개
+current url: https://www.saramin.co.kr/zf_user/auth?ut=p&url=%2Fzf_user%2Fpersons%2Fscrap-recruit%3Fsort%3DPC%26page_count%3D20%26status%3D
+[사람인] 세션 만료, 자동 로그인 시도...
+[사람인] 브라우저에서 네이버 로그인을 완료한 후 Enter를 눌러주세요.
+로그인 완료 후 Enter: [사람인] 세션 저장 완료
+page.goto: Target page, context or browser has been closed
+    at scrapeSaramin (D:\dev_repo\job-sync\src\scrapers\saramin.ts:47:16)
+    at async main (D:\dev_repo\job-sync\src\index.ts:18:23)
+
+> job-sync@1.0.0 dev
+> tsx src/index.ts
+
+current url: https://www.jobkorea.co.kr/
+[잡코리아] 세션 만료, 자동 로그인 시도...
+[잡코리아] 브라우저에서 네이버 로그인을 완료한 후 Enter를 눌러주세요.
+로그인 완료 후 Enter: [잡코리아] 세션 저장 완료
+[잡코리아 스크래핑] 페이지 2개 / 고유 공고 29개 / 수집 25개 / 마감 제외 0개 / 최종 23개 / 중복 링크 2개
+current url: https://www.saramin.co.kr/zf_user/persons/scrap-recruit?sort=PC&page_count=20&status=
+[사람인 스크래핑] 최종 4개
+@notionhq/client warn: request fail {
+  code: 'validation_error',
+  message: 'body failed validation: body.properties.서류 마감일.date.start should be a valid ISO 8601 date string, instead was `"2026-26-06"`.',
+  attempt: 0,
+  requestId: '11f8c1b0-0190-4598-b294-0e85dbfc6dee'
+}
+APIResponseError: body failed validation: body.properties.서류 마감일.date.start should be a valid ISO 8601 date string, instead was `"2026-26-06"`.
+    at buildRequestError (D:\dev_repo\job-sync\node_modules\@notionhq\client\src\errors.ts:314:12)
+    at Client.executeSingleRequest (D:\dev_repo\job-sync\node_modules\@notionhq\client\src\Client.ts:479:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Client.executeWithRetry (D:\dev_repo\job-sync\node_modules\@notionhq\client\src\Client.ts:424:16)
+    at async createJob (D:\dev_repo\job-sync\src\notion\jobs.ts:21:3)
+    at async syncJobs (D:\dev_repo\job-sync\src\notion\jobs.ts:80:5)
+    at async main (D:\dev_repo\job-sync\src\index.ts:23:3) {
+  code: 'validation_error',
+  status: 400,
+  headers: Headers {
+    date: 'Tue, 09 Jun 2026 02:55:19 GMT',
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': '259',
+    'cf-ray': 'a08cdb4efcb120d9-ICN',
+    'cf-cache-status': 'DYNAMIC',
+    etag: 'W/"103-T7yqc0x+Mm74ZyxeXUsRxNOAU3w"',
+    server: 'cloudflare',
+    'strict-transport-security': 'max-age=31536000; includeSubDomains; preload',
+    vary: 'Accept-Encoding',
+    'content-security-policy': "default-src 'none'",
+    'referrer-policy': 'strict-origin-when-cross-origin',
+    'x-content-type-options': 'nosniff',
+    'x-dns-prefetch-control': 'off',
+    'x-download-options': 'noopen',
+    'x-frame-options': 'SAMEORIGIN',
+    'x-notion-request-id': '11f8c1b0-0190-4598-b294-0e85dbfc6dee',
+    'x-permitted-cross-domain-policies': 'none',
+    'x-xss-protection': '0',
+    'set-cookie': '__cf_bm=R_tl.zawORNu5dKQQ1N5wg9Cw.z7cuEH.QR1hSijyvI-1780973718.8772042-1.0.1.1-FEc4Yu67046tD1M8uYmPcTl3c4LsO5slSMAr_t4TH7L3m83.saLe9HUZLsj2Df_8GuisKF2EsprZN9Mz3mc6A3eEgnzKel.Cl1bM8e7oxKx87l5XE3tHds9YA4a9E9ZF; HttpOnly; SameSite=None; Secure; Path=/; Domain=notion.com; Expires=Tue, 09 Jun 2026 03:25:19 GMT',
+    'alt-svc': 'h3=":443"; ma=86400'
+  },
+  body: '{"object":"error","status":400,"code":"validation_error","message":"body failed validation: body.properties.서류 마감일.date.start should be a valid ISO 8601 date string, instead was `\\"2026-26-06\\"`.","request_id":"11f8c1b0-0190-4598-b294-0e85dbfc6dee"}',
+  additional_data: undefined,
+  request_id: '11f8c1b0-0190-4598-b294-0e85dbfc6dee'
+}
